@@ -1,0 +1,923 @@
+<html> 
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Circline</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/buzzer.css">
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Gugi&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Hi+Melody&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Song+Myung&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Kirang+Haerang&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Black+And+White+Picture&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Single+Day&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Cute+Font&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+      var name="<%=name%>";
+    </script>
+    <style type="text/css">
+      #msgbox { background: #000; padding: 1px; position: fixed; bottom: 0; width: 350px; margin:0px !important; margin-left : -12px !important;}
+      #msgbox input { border: 0; padding: 10px; width: 80%; margin-right: .5%; outline: none;}
+      #msgbox #send-btn { width: 19.5%; background:#c83274; border: none; padding: 10px; outline:none; display: inline-block;text-align: center; color:white;}
+      #messages { list-style-type: none; margin: 0; padding: 0; overflow: scroll;}
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+      #info li { padding: 5px 10px; }
+      #info li:nth-child(odd) { background: #eee; }
+      #profile-img{
+        margin:10 auto;
+        text-align: center;
+        color:white;
+        font-size: 0.2rem;
+        line-height: 70px;
+        width: 70px; height: 70px;
+        border-radius: 70px;
+        background-color: #c83274;
+      }
+      #games-list{
+        overflow: auto;
+      }
+      #games-list li { padding: 20px 10px; opacity: 0.5; font-size: 1.5rem; }
+      #games-list li:nth-child(even) { background: #444; color: white;}
+      #games-list li:nth-child(odd) { background: #c83274; color: white;}
+
+
+      #manager-list{
+        overflow: auto;
+      }
+      #manager-list li { padding: 5px 10px;  }
+      #manager-list li:nth-child(even) { background: #aaa; color: black;}
+
+
+      #rank-list{
+        overflow: auto;
+      }
+      #rank-list li {padding: 5px 10px; }
+      #rank-list li:nth-child(odd) { font-weight: bold; font-size: 2rem; color:#ccc;}
+      #rank-list li:nth-child(even) { background: #666; color: white;}
+
+      #whobuzzer{
+        display: inline-block;
+        font-size: 2rem;
+        color:#c83274;
+      }
+      .modal-subtitle{
+        color:#66ffcc;
+      }
+      
+
+
+    </style>
+  </head>
+  <body style="padding: 0px !important;overflow: hidden;">
+    <div style="padding: 0px !important;overflow: hidden;">
+        
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+
+        <div id="phone">
+          <header>
+            <p class=head-title>Circline</p><p class=sub-title>다함게 둥글게 앉아 서로를 마주보며</p>
+            <p class=welcome><%=name%>님 환영합니다.</p>
+          </header>
+          
+          <div class="tabs">
+            <ul>
+              <li id="room" class="active"><div>대기실</div></li>
+              <li id="games"><div>게임즈</div></li>
+              <li id="rank" onclick="getRank()"><div>랭킹</div></li>
+              <li id="info" onclick="getInfo()"><div>더보기</div></li>
+            </ul>
+          </div>
+          
+          <div class="tab-content">
+            <ul>
+              <ul id="messages">
+                <li style="text-align: center;"><%=name%>님 환영합니다.</li>
+              </ul>
+              <div id=msgbox>
+                <input id="m" autocomplete="off" /><div id="send-btn">전송</div>
+              </div>
+            </ul>
+            
+            <% if(name=="이정헌"){ %>
+            
+            <ul id=manager-list>
+              <li>관리자페이지</li>
+              <li>Buzer</li>
+              <li>
+                <span class="badge badge-danger" onclick="bgm(1)" style="font-size: 2rem;">O</span>
+                <span class="badge badge-primary" onclick="bgm(2)" style="font-size: 2rem;">X</span>
+                <br><br>
+                <span class="badge badge-success" onclick="bgm(3)" style="font-size: 1rem;">Start</span>
+                <span class="badge badge-success" onclick="bgm(4)" style="font-size: 1rem;">Start2</span>
+                <span class="badge badge-success" onclick="bgm(5)" style="font-size: 1rem;">Start3</span>
+                <span class="badge badge-success" onclick="bgm(6)" style="font-size: 1rem;">Play</span>
+                <span class="badge badge-success" onclick="bgm(7)" style="font-size: 1rem;">Stop</span><br><br>
+                <span class="badge badge-info" onclick="bgm(8)" style="font-size: 1rem;">buzzer</span>
+                <span class="badge badge-info" onclick="buzzerInit()" style="font-size: 1rem;">버저초기화</span>
+              </li>
+              <li>파트너/팀/점수 컨트롤러</li>
+              <li>
+                <span class="badge badge-primary" onclick="serPartnerInput('전도해')">전도해</span>
+                <span class="badge badge-primary" onclick="serPartnerInput('정혜원')">정혜원</span>
+                <span class="badge badge-primary" onclick="serPartnerInput('이지원')">이지원</span>
+                <span class="badge badge-primary" onclick="serPartnerInput('유경민')">유경민</span>
+                <span class="badge badge-primary" onclick="serPartnerInput('전은진')">전은진</span>
+                <span class="badge badge-primary" onclick="serPartnerInput('원도연')">원도연</span>
+                <span class="badge badge-primary" onclick="serPartnerInput('지헌')">지헌</span>
+                <span class="badge badge-primary" onclick="serPartnerInput('오수진')">오수진</span>
+                <span class="badge badge-primary" onclick="serPartnerInput('조재영')">조재영</span>
+                <span class="badge badge-primary" onclick="serPartnerInput('장호택')">장호택</span><br><br>
+                <span class="badge badge-success" onclick="serTeamInput('A')" style="font-size: 1rem;">A</span>
+                <span class="badge badge-success" onclick="serTeamInput('B')" style="font-size: 1rem;">B</span><br><br>
+
+                <span class="badge badge-warning" onclick="serScoreInput('2')" style="font-size: 1rem;">+2</span>
+                <span class="badge badge-warning" onclick="serScoreInput('4')" style="font-size: 1rem;">+4</span>
+                <span class="badge badge-warning" onclick="serScoreInput('8')" style="font-size: 1rem;">+8</span>
+                <span class="badge badge-warning" onclick="serScoreInput('10')" style="font-size: 1rem;">+10</span><br><br>
+
+
+                <span class="badge badge-dark" onclick="serPartnerInput('')" style="font-size: 1rem;">선택초기화</span><br><br>
+                <input type="text" placeholder="지정자" style="width:5rem;" id=set-partner-target />
+                <input type="text" placeholder="파트너" style="width:5rem;" id=set-partner-partner />
+                <button class="btn btn-primary" style="width: 5rem;font-size: 0.6rem;" id=set-partner-btn onclick='setPartner()'>파트너지정</button><br>
+                <input type="text" placeholder="팀" style="width:5rem;" id=set-team-team />
+                <button class="btn btn-primary" style="width: 5rem;font-size: 0.6rem;" id=set-team-btn onclick='setTeam()'>팀지정</button><br>
+                <input type="text" placeholder="점수" style="width:5rem;" id=set-score />
+                <button class="btn btn-primary" style="width: 5rem;font-size: 0.6rem;" id=set-score-addbtn onclick='addScore()'>점수추가</button><br>
+                <button class="btn btn-danger" style="width: 5rem;font-size: 0.6rem;" id=set-score-setbtn onclick='setScore()'>점수수정</button><br>
+              </li>
+              <li>문제컨트롤러</li>
+              <li>
+                <button class="btn btn-primary" onclick="allCloseQ()">문제전체잠금</button><br><br>
+                파트너/혜원이 >< 이심전심뮤직큐!<br>
+                <button class="btn btn-primary" onclick="openQ(1)">문제오픈</button>
+                <button class="btn btn-info" onclick="bgm(9)">이효리-10minutes 1</button>
+                <button class="btn btn-info" onclick="bgm(10)">이효리-10minutes 3</button>
+                <button class="btn btn-info" onclick="bgm(11)">이효리-10minutes all</button>
+
+                <button class="btn btn-info" onclick="bgm(12)">브아걸-아브라 1</button>
+                <button class="btn btn-info" onclick="bgm(13)">브아걸-아브라 3</button>
+                <button class="btn btn-info" onclick="bgm(14)">브아걸-아브라 all</button>
+
+                <button class="btn btn-info" onclick="bgm(15)">박지윤-성인식 1</button>
+                <button class="btn btn-info" onclick="bgm(16)">박지윤-성인식 3</button>
+                <button class="btn btn-info" onclick="bgm(17)">박지윤-성인식 all</button>
+
+
+                <button class="btn btn-info" onclick="bgm(18)">쿨-해변의연인 1</button>
+                <button class="btn btn-info" onclick="bgm(19)">쿨-해변의연인 3</button>
+                <button class="btn btn-info" onclick="bgm(20)">쿨-해변의연인 all</button>
+
+                <span class="badge badge-dark" style="font-size: 1rem;">정혜원</span>
+                <span class="badge badge-dark" style="font-size: 1rem;">고양이</span>
+                <span class="badge badge-dark" style="font-size: 1rem;">마그마</span>
+                <span class="badge badge-dark" style="font-size: 1rem;">오징어</span>
+                
+                <br>
+                <br>
+                
+                팀전/눈치 코치 지헌이의 눈치껏 말해요<br>
+                <button class="btn btn-primary" onclick="openQ(2)">문제오픈</button>
+                <span class="badge badge-dark" style="font-size: 1rem;">잠자기 전에 무슨 생각해?</span>
+                너(한글자) 아내 강아지 우리아빠 이모네집
+                <span class="badge badge-dark" style="font-size: 1rem;">이성친구에게 붙여주고 싶은 애칭은?</span>
+                곰 돼지 강아지 이눔시키 사랑사냥꾼 사랑의주유소
+
+                <br>
+                <br>
+
+                파트너/감자마을 도해여왕 말풍선54321<br>
+                <button class="btn btn-primary" onclick="openQ(3)">문제오픈</button>
+                <span class="badge badge-dark" style="font-size: 1rem;">내 파트너의 매력포인트는 ? </span>
+                <span class="badge badge-dark" style="font-size: 1rem;">내 파트너에게 지어주고 싶은 별명은?</span>
+                <span class="badge badge-dark" style="font-size: 1rem;">파트너가 사귀자고 한다면?</span>
+                <span class="badge badge-dark" style="font-size: 1rem;">반대로 파트너가 사귀자고 한다면?</span>
+                <span class="badge badge-dark" style="font-size: 1rem;">본인의 보물 1호는?</span>
+                <span class="badge badge-dark" style="font-size: 1rem;">본인이 올해 가장 바라는 소원은?</span>
+                <span class="badge badge-dark" style="font-size: 1rem;">연인을 부르는 애칭은?</span><br><br>
+
+                <span class="badge badge-dark" style="font-size: 1rem;">어제밤에 뭐했어?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">심심할 때 하는 행동은?</span>
+                <span class="badge badge-dark" style="font-size: 1rem;">기분이 좋을 때 하는 행동은?</span>
+                <span class="badge badge-dark" style="font-size: 1rem;">좋아하는 위인은?</span>
+                <span class="badge badge-dark" style="font-size: 1rem;">추천하고 싶은 영화는?</span><br><br>
+
+                <span class="badge badge-dark" style="font-size: 1rem;">집 냉동실에 뭐있어?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">냉장고 안에 뭐 있어?</span>
+                <span class="badge badge-dark" style="font-size: 1rem;">무인도에 가지고 싶은 물건은?</span>
+                <span class="badge badge-dark" style="font-size: 1rem;">내 별명은 ? </span>
+                <span class="badge badge-dark" style="font-size: 1rem;">어릴 때 꿈은?</span><br><br>
+
+
+
+                <br>
+                <br>
+
+                팀전/장마담 포커페이스<br>
+                <button class="btn btn-primary" onclick="openQ(4)">문제오픈</button>
+                이순신, 필사즉생 필생즉사라는 명언을 남긴 인물의 이름은?<br>
+                윷은 어떤 가축을 뜻할까요?<br>
+                도개걸윷모,돼지,개,양,소,말<br>
+                1. 개 2. 말 3. 소<br>
+                운칠기삼은 모든 일의 성패는 운이 7할 기가 3할을 차지한다는 뜻인데요. 여기서 기는 무엇일까요?<br>
+                1. 기운, 2. 능력 3. 응원 <br>
+
+
+
+                <br>
+                <br>
+
+                파트너/재영잉쿨녀의 속마음<br>
+                <button class="btn btn-primary" onclick="openQ(5)">문제오픈</button>
+                비상금,애인 이름,첫눈에 반했니?,자 본인이 아는 수학공식 한번 얘기해보세요!,자 본인의 매력 세가지만 얘기해 봐요(아니 매력을 얘기하면되는데 왜 열받은거에요),
+
+
+                <br>
+                <br>
+
+                팀전/코인마스터 후엠아이 훈련법<br>
+                <button class="btn btn-primary" onclick="openQ(6)">문제오픈</button>
+
+                <span class="badge badge-dark" style="font-size: 1rem;" onclick="appendBody('A1아이유 / A2이소룡 / B이순신')">A1아이유/A2이소룡/B이순신</span>
+                <span class="badge badge-dark" style="font-size: 1rem;" onclick="appendBody('B1아귀 / B2세종대왕 / A신데렐라')">B1아귀/B2세종대왕/A신데렐라</span>
+                <span class="badge badge-dark" style="font-size: 1rem;" onclick="appendBody('r1드라큐라백작 / r2프레디머큐리 / r3전도해')">r1드라큐라백작/r2프레디머큐리/r3전도해</span>
+
+
+                <br>
+                <br>
+
+                팀전/경민형의 끊기면 죽는다<br>
+                <button class="btn btn-primary" onclick="openQ(7)">문제오픈</button>
+                <span class="badge badge-dark" style="font-size: 1rem;">네글자로 된 위인?</span>세종대왕 퀴리부인 을지문덕 나폴레옹
+                <span class="badge badge-dark" style="font-size: 1rem;">네글자로 된 한국영화?</span>내부자들 박하사탕 부당거래 신과함께 
+                <span class="badge badge-dark" style="font-size: 1rem;">남자아이돌?</span>비투비 쿨 
+                <span class="badge badge-dark" style="font-size: 1rem;">면요리?</span>국수 짜장면 칼국수 평양냉면 짬뽕 
+                <span class="badge badge-dark" style="font-size: 1rem;">숫자가 들어가는 상업영화 제목?</span>세븐 넘버쓰리 세븐틴 
+                <span class="badge badge-dark" style="font-size: 1rem;">ㅃ이 들어가는 단어?</span>빵 빠비용 뽕 빠방 
+                <span class="badge badge-dark" style="font-size: 1rem;">남자배우?</span>성동일 배성우 이광수 
+
+
+                <br>
+                <br>
+
+                지목/이지원바보클럽 가입조건<br>
+                <button class="btn btn-primary" onclick="openQ(8)">문제오픈</button>
+                <span class="badge badge-dark" style="font-size: 1rem;">내가 먹고싶은것?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">학교 다닐 때 공부 잘했어?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">지금 뭐 먹고싶어?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">휴가때 하고싶은것?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">잘하는 거짓말은?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">롤모델이 뭐냐?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">비오는날 뭐하고 싶어?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">파트너에게 하고싶은말?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">별명이 뭐야?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">집 냉장고에 뭐있어?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">애인을 부르는 애칭은?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">여자친구에게 잘 하는 말은?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">지금 가장 하고싶은게 뭐야?</span>                
+                <span class="badge badge-dark" style="font-size: 1rem;">최근에 읽은 책은?</span>                
+
+                <br>
+                <br>
+
+                팀전/해바라기반 은진쌤 퀴즈!<br>
+                <button class="btn btn-primary" onclick="openQ(9)">문제오픈</button>
+                <span class="badge badge-dark" style="font-size: 1rem;">오세아니아</span>
+                 지구의 지역 중 하나로 태평양의 육지와 섬 지역을 말합니다. 대양주(大洋洲)라고도 하는데요.
+                  파푸아 섬과 뉴질랜드를 큰 섬으로 하며, 미국의 하와이주를 비롯한 태평양의 크고 작은 섬들을 포함하는 이 지역은 무엇일까요?
+
+                  <span class="badge badge-dark" style="font-size: 1rem;">트렌치코트</span>
+                  제1차 세계대전 때 영국 군인들을 만든 것인데요. 드레시하기보다는 군인같은 강직한 느낌을 주지만
+                  현대에는 비즈니스맨에게 꼭 필요한 아이템이 되었습니다. 사람들은 방수목적으로 만들어졌다고 생각했지만,
+                  세월이 지나면서 형태가 자유분방해지고 스타일의 아이콘이 되었습니다. 이 아이템은 무엇일까요?
+
+                <br>
+                <br>
+
+
+                mc/불타오르는 열정맨 원도일 탐정~_~<br>
+                <button class="btn btn-primary" onclick="openQ(10)">문제오픈</button>
+                해리포터와마법사의돌,
+                레오나르도디카프리오,
+                자이제시작이야내꿈을,
+                아침에일어나뽀뽀뽀쪽,
+                언제나승리는우리의편,
+                월요일이다월월월아자,
+
+
+
+
+                
+
+              </li>
+              <li>멤버정보</li>
+              <li>
+                <button class="btn btn-primary" style="width: 7rem;font-size: 0.7rem;" id=get-userlist onclick='getUserlist()'>멤버 정보 최신화</button><br><br>
+                <div id=userlist-info></div>
+              </li>
+
+            </ul>
+
+            <% } else { %>
+            
+            <ul id=games-list>
+              <li style="font-family: 'Nanum Pen Script', cursive;"  id=q1 onclick="genQ1()"><span class="badge badge-info">파트너</span> 혜원이 >< 이심전심뮤직큐!</li>
+              <li style="font-family: 'Gugi', cursive;" id=q2 onclick="genQ2()"><span class="badge badge-success" >팀전</span> 눈치 코치 지헌이의 눈치껏 말해요</li>
+              <li style="font-family: 'Hi Melody', cursive;" id=q3 onclick="genQ3()"><span class="badge badge-info">파트너</span> 감자마을 도해여왕 말풍선54321</li>
+              <li style="font-family: 'Song Myung', serif;" id=q4 onclick="genQ4()"><span class="badge badge-success">팀전</span> 장마담 포커페이스</li>
+              <li style="font-family: 'Kirang Haerang', cursive;" id=q5 onclick="genQ5()"><span class="badge badge-info">파트너</span> 재영잉쿨녀의 속마음</li>
+              <li style="font-family: 'Black And White Picture', sans-serif;" id=q6 onclick="genQ6()"><span class="badge badge-success">팀전</span> 코인마스터 후엠아이 훈련법</li>
+              <li style="font-family: 'Single Day', cursive;" id=q7 onclick="genQ7()"><span class="badge badge-success">팀전</span> 경민형의 끊기면 죽는다</li>
+              <li style="font-family: 'Black Han Sans', sans-serif;" id=q8 onclick="genQ8()"><span class="badge badge-danger">지목</span> 이지원바보클럽 가입조건 </li>
+              <li style="font-family: 'Cute Font', cursive;" id=q9 onclick="genQ9()"><span class="badge badge-success">팀전</span> 해바라기반 은진쌤 퀴즈!</li>
+              <li style="font-family: 'Do Hyeon', sans-serif;" id=q10 onclick="genQ10()"><span class="badge badge-danger">MC</span> 불타오르는 열정맨 원도일 탐정~_~</li>
+            </ul>
+            
+            <% } %>
+            
+            <ul id=rank-list>
+              <li>1등</li>
+              <li style="color:gold;" id=r1>1등</li>
+              <li>2등</li>
+              <li style="color:#66ffcc;" id=r2>2등</li>
+              <li>3등</li>
+              <li style="color:#00ff33;" id=r3>3등</li>
+              <li>4등</li>
+              <li id=r4>4등</li>
+              <li>5등</li>
+              <li id=r5>5등</li>
+              <li>6등</li>
+              <li id=r6>6등</li>
+              <li>7등</li>
+              <li id=r7>7등</li>
+              <li>8등</li>
+              <li id=r8>8등</li>
+              <li>9등</li>
+              <li id=r9>9등</li>
+              <li>10등</li>
+              <li id=r10>10등</li>
+            </ul>
+             <ul id="info">
+                <li style="text-align: right;">circline-alpha-0.5.1-halloween</li>
+                <li><div id=profile-img>+프로필사진변경</div></li>
+                <li><b style="font-size: 2rem;"><%=name%></b>님</li>
+                <li>내 파트너는 <b id=my-partner style="font-size: 1.2rem;">???</b>님</li>
+                <li>우리팀 <b id=my-team style="font-size: 1.2rem;">???</b>팀</li>
+                <li>나의 점수 <b id=my-score style="font-size: 1.2rem;">???</b>점</li>
+                <li>선호 게임 #가 #나 #다 ...</li>
+                <li>포인트결제</li>
+                <li>환경설정</li>
+                <li>개발자후원</li>
+                <li style="color:#c83274;">About</li>
+            </ul>
+          </div>
+        </div>
+
+   
+    </div>
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#alertAddScoreModal" style="display: none;" id=alertAddScoreModalBtn>
+      alertAddScore
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="alertAddScoreModal" tabindex="-1" role="dialog" aria-labelledby="alertAddScoreModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="alertAddScoreModalTitle">축하드립니다!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id=alertAddScoreModalBody>
+            님과 님이 점을 획득하셨습니다!>3<
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Button trigger modal -->
+    <% if(name=="이정헌"){ %>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#buzerModal" style="position: absolute;top:0px;" id=buzerModalBtn>
+        buzerModal
+      </button>
+    <% } else { %>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#buzerModal" style="display: none;" id=buzerModalBtn>
+        buzerModal
+      </button>
+    <% } %>
+
+    <!-- Modal -->
+    <div class="modal fade" id="buzerModal" tabindex="-1" role="dialog" aria-labelledby="buzerModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="buzerModalTitle">버저!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id=buzerModalBody   style="background-color: #1f1a25 !important;color:white;">
+            제일빠른Buzzzing<div id=whobuzzer>???</div>님
+            <div class=modal-subtitle>스토리</div>
+            <div id=buzerModalStory>스토리</div>
+            <div class=modal-subtitle>질문</div>
+            <div id=buzerModalQuestion>질문</div>
+            <br><br>
+            <center><button class="buz draw-border" onclick="buzzing()">Buzzzzing</button></center>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/jquery.min.js"></script> 
+    <script src="/assets/js/mainTab.js"></script> 
+    <script type="text/javascript">
+       //var socket = io();
+       var socket;
+       $(function() {
+          subTitleAnimationRegister();
+          resizeWindow();
+          login(); 
+          sendMsgEventRegister();
+          getInfoEventRegister();
+          rankEventRegister();
+          alertAddScoreEventRegister();
+          buzzingEventRegister();
+          initBuzzerEventRegister();
+          openQEventRegister();
+          closeAllQEventRegister();
+          addQ6QuestionEventRegister();
+          initAv();
+       });
+      var q6update=false;
+       function addQ6QuestionEventRegister(){
+        socket.on('add-q6-question',(str)=>{
+          $('#buzerModalQuestion').html(str);
+          q6update=true;
+        });
+       }
+
+       function openQEventRegister(){
+        socket.on('open-q',(qid)=>{
+          $('#q'+qid).css('opacity',1);
+          if(qid==1)genQ1();
+          else if(qid==2)genQ2();
+          else if(qid==3)genQ3();
+          else if(qid==4)genQ4();
+          else if(qid==5)genQ5();
+          else if(qid==6)genQ6();
+          else if(qid==7)genQ7();
+          else if(qid==8)genQ8();
+          else if(qid==9)genQ9();
+          else if(qid==10)genQ10();
+        });
+       }
+
+       function closeAllQEventRegister(){
+        socket.on('close-all-q',()=>{
+          for(var i=1;i<=10;i++){
+           $('#q'+i).css('opacity',0.5); 
+          }
+        });
+
+       }
+
+       function initBuzzerEventRegister(){
+        socket.on('init-buzzer',(msg)=>{
+          if(msg=="success"){
+            $('#whobuzzer').html('???');
+          }
+        });
+       }
+
+       function buzzingEventRegister(){
+        socket.on('buzzing',(state,name)=>{
+          $('#whobuzzer').html(name);
+        });
+       }
+
+       function initAv(){
+        fav=new Audio();
+       }
+
+       function alertAddScoreEventRegister(){
+        socket.on('alert-add-score-team',(team,score)=>{
+          var k=team+"팀이 "+score+"점을 획득하셨습니다!?>3<!!"
+          $('#alertAddScoreModalBody').html(k);
+          $('#alertAddScoreModalBtn').click();
+        });
+        socket.on('alert-add-score-partner',(name,parter,score)=>{
+          var k=name+"님과 "+parter+"님이 "+score+"점을 획득하셨습니다!?>3<!!"
+          $('#alertAddScoreModalBody').html(k);
+          $('#alertAddScoreModalBtn').click();
+        });
+       }
+
+       function getInfoEventRegister(){
+        socket.on('get-user',(user)=>{
+          if(user==null)return;
+          $('#my-partner').html(user.partner);
+          $('#my-team').html(user.team);
+          $('#my-score').html(user.score);
+
+        });
+       }
+
+       function subTitleAnimationRegister(){
+          const sec=3000;
+          $('.sub-title').fadeOut(sec,()=>{
+            $('.sub-title').fadeIn(sec,subTitleAnimationRegister());
+          });
+       }
+
+       function rankEventRegister(){
+        socket.on('get-rank',(list)=>{
+          if(list==null){
+            alert('null!');return;
+          }
+          var len=list.length;
+          for(var i=0;i<len;i++)
+          {
+            var k="점수 : " + list[i].score + "점 \t "+list[i].name +"님";
+            $('#r'+(i+1)).html(k);
+          }
+        });
+
+       }
+
+       function resizeWindow(){
+          h=window.innerHeight;
+          $('#messages').css('height',h*0.7);
+          $('#games-list').css('height',h*0.8);
+          $('#manager-list').css('height',h*0.8);
+          $('#rank-list').css('height',h*0.8);
+       }
+
+       function login(){
+          socket=io();
+          socket.emit('message',name + "님 입장하셨습니다. >ㅁ< ♥");
+       }
+
+       function sendMsgEventRegister(){
+          socket.on('message',(msg)=>{
+              $('#messages').append($('<li>').css('color',msg.color).text(msg.msg));
+          });
+
+          $("#send-btn").click(()=>{
+            $("#send-btn").css("background","#f788d1");
+            var m=$('#m').val();
+            $('#m').val('');
+            socket.emit('message',name + "님 ▶ " +m);
+            setTimeout(()=>{$("#send-btn").css("background","#c83274");},500);
+          });
+       }
+
+       function getInfo(){
+        socket.emit('get-user','<%=name%>');
+       }
+
+       function getRank(){
+        socket.emit('get-rank');
+       }
+
+       function bgm(id){
+
+        if(id==1)
+        {
+          av=new Audio('/assets/mp3/ok.mp3');
+          av.play();
+        }else if(id==2){
+          av=new Audio('/assets/mp3/wrong.mp3');
+          av.play();
+        }else if(id==3){
+          av=new Audio('/assets/mp3/start.mp3');
+          av.play();
+        }else if(id==4){
+          av=new Audio('/assets/mp3/start2.mp3');
+          av.play();
+        }else if(id==5){
+          av=new Audio('/assets/mp3/start3.mp3');
+          av.play();
+        }else if(id==6){
+          fav.src='/assets/mp3/play.mp3';
+          fav.loop=true;
+          fav.play();
+        }else if(id==7){
+          fav.pause();
+        }else if(id==8){
+          av=new Audio('/assets/mp3/buzz.mp3');
+          av.play();
+        }else if(id==9){
+          av=new Audio('/assets/mp3/m1_1.mp3');
+          av.play();
+        }else if(id==10){
+          av=new Audio('/assets/mp3/m1_3.mp3');
+          av.play();
+        }else if(id==11){
+          av=new Audio('/assets/mp3/m1_all.mp3');
+          av.play();
+        }else if(id==12){
+          av=new Audio('/assets/mp3/a_1.mp3');
+          av.play();
+        }else if(id==13){
+          av=new Audio('/assets/mp3/a_3.mp3');
+          av.play();
+        }else if(id==14){
+          av=new Audio('/assets/mp3/a_all.mp3');
+          av.play();
+        }else if(id==15){
+          av=new Audio('/assets/mp3/s_1.mp3');
+          av.play();
+        }else if(id==16){
+          av=new Audio('/assets/mp3/s_3.mp3');
+          av.play();
+        }else if(id==17){
+          av=new Audio('/assets/mp3/s_all.mp3');
+          av.play();
+        }else if(id==18){
+          av=new Audio('/assets/mp3/c_1.mp3');
+          av.play();
+        }else if(id==19){
+          av=new Audio('/assets/mp3/c_3.mp3');
+          av.play();
+        }else if(id==20){
+          av=new Audio('/assets/mp3/c_all.mp3');
+          av.play();
+        }
+
+       }
+
+       function buzzing(){
+        bgm(8);
+        socket.emit('buzzing','<%=name%>');
+       }
+
+       function buzzerInit(){
+        socket.emit('init-buzzer');
+       }
+
+       function genQ1(){
+        <% if(name=="이정헌"){ %>
+        <% } else { %>
+            if($('#q1').css('opacity')>0.5)
+        <% } %>
+        {
+            var story=`눈이 높기로 소문난 혜원누나는 노래 취향 또한 예사롭지 않다.<br>
+            자! 혜원 누나와 가까워지고 싶다면 다음 노래들을 단번에 맞춰보자!`;
+            $('#buzerModalStory').html(story);
+            var qes=`다음 들려주는 노래를 1초만 듣고 노래를 맞춰보자!<br>
+            버저를 울린 사람이 삼행시를,<br> 파트너가 노래 제목을 맞춰야한다.<br>
+            노래 제목은 공유하면 아니아니 아니되요.`;
+            $('#buzerModalQuestion').html(qes);
+            $('#buzerModalBtn').click();
+          }
+          
+       }
+
+        function genQ2(){
+          <% if(name=="이정헌"){ %>
+          <% } else { %>
+              if($('#q2').css('opacity')>0.5)
+          <% } %>
+          {
+              var story=`사람들은 잘모르지만 지헌형의 눈치는 고수의 경지이다.<br>
+              못믿겠다고?<br>
+              자! 지헌형의 눈치 실력이 을매나 대단한지 보여주지!`;
+              $('#buzerModalStory').html(story);
+              var qes=`다음 사회자의 질문에 대해 팀별로 한명씩 한글자씩 늘려가며 3초안에 대답해야 한다.<br>
+              예를 들어 내가 좋아하는 음식은? 밤 > 딸기 > 바나나 > 워터멜론 > 김치칼국수<br>
+              즉, 말만 되면 되오니, 3초안에 지헌형같은 센스와 순발력을 보여주자!<br>
+              `;
+              $('#buzerModalQuestion').html(qes);
+              $('#buzerModalBtn').click();
+            }
+          
+       }
+
+        function genQ3(){
+        <% if(name=="이정헌"){ %>
+        <% } else { %>
+            if($('#q3').css('opacity')>0.5)
+        <% } %>
+        {
+            var story=`오늘도 평화로운 감자마을! 말하기 좋아하는 도해여왕은<br>
+            답답한걸 죽기보다 싫어한다. 자! 파트너와 짝을 지어 도해여왕을 기쁘게 해드리자!`;
+            $('#buzerModalStory').html(story);
+            var qes=`다음 사회자의 질문에 파트어와 번갈아 가며 한글자씩 줄여가며 3초안에 대답해야 한다.<br>
+            예를 들어 어제 뭐했어? 사과샀었지(5글자) > (다른파트너)심심할 때 뭐햬? 손톱깍이(4글자) > 3글자 ...1글자
+            즉, 말만 되면 되오니, 3초안에 도해여왕의 개그센스를 맞춰보자!`;
+            $('#buzerModalQuestion').html(qes);
+            $('#buzerModalBtn').click();
+          }
+          
+       }
+
+        function genQ4(){
+        <% if(name=="이정헌"){ %>
+        <% } else { %>
+            if($('#q4').css('opacity')>0.5)
+        <% } %>
+        {
+            var story=`장마담은 절대 게임에서 흔들리지 않는다. 타고난 페이스는 누구도 궤뚫어볼수 없지.<br>
+            자! 퀴즈를 통해 반대로 장마담을 속여보자!`;
+            $('#buzerModalStory').html(story);
+            var qes=`다음 사회자의 퀴즈를 통해 정답을 팀원들이 적는데요. <br>
+            반대팀 대표 한명이 정답인지 오답인지를 맞춘만큼 점수를 획득한다.<br>
+            <input type='text' placeholder='정답을 적은 후, 폰을 덮어놓으세요.' />
+            `;
+            $('#buzerModalQuestion').html(qes);
+            $('#buzerModalBtn').click();
+          }
+          
+       }
+
+        function genQ5(){
+        <% if(name=="이정헌"){ %>
+        <% } else { %>
+            if($('#q5').css('opacity')>0.5)
+        <% } %>
+        {
+            var story=`재영쿨녀는 매사에 침착하고 표정변화가 거의 없다.<br>
+            누가 과연 재영쿨녀처럼 침착할 수 있을까?<br>
+            자! 재영쿨녀가 지목한 멤버가 테스트를 받아보자!`;
+            $('#buzerModalStory').html(story);
+            var qes=`다음 재영쿨녀가 지목한 멤버가 반대 팀원의 여러가지 질문에<br>
+            잘 견뎌서, 열받거나 당황하지 않아야한다. 30초를 버텨내면 성공!<br>
+            `;
+            $('#buzerModalQuestion').html(qes);
+            $('#buzerModalBtn').click();
+          }
+          
+       }
+
+        function genQ6(){
+        <% if(name=="이정헌"){ %>
+        <% } else { %>
+            if($('#q6').css('opacity')>0.5)
+        <% } %>
+        {
+            var story=`아무도 안믿겠지만, 실제로 9월에 코인마스터 수진이는 하루에 1000만원을 딸만큼 <br>
+            소득이 괜찮다. <br>
+            수진이의 비법은 작은 정보로 가격을 유추하는 거라던데..<br>
+            자! 제대로 수진의 비법을 연습해보자!`;
+            $('#buzerModalStory').html(story);
+            var qes=`팀마다 대표 사람들이 나와 자기에게 지정된 인물이 누구인지!<br>
+            다른 팀 대표 멤버에게 질문하면서 맞추는 훈련법이다.<br>
+            작은 정보로 내가 누구인지 유추해서 맞춰보자!`;
+            if(!q6update){
+              $('#buzerModalQuestion').html(qes);
+            }
+            $('#buzerModalBtn').click();
+          }
+          
+       }
+
+       function appendBody(str)
+       {
+        socket.emit('add-q6-question',str);
+       }
+
+        function genQ7(){
+        <% if(name=="이정헌"){ %>
+        <% } else { %>
+            if($('#q7').css('opacity')>0.5)
+        <% } %>
+        {
+            var story=`구글 승인 후배들 피셜,<br>
+             나이는 어려도 경민형이라 부르고 싶다라고 말할정도로 경민이는<br>
+             팀을 위해 야근도 곱씹을 정도로 희생하고 있다.<br>
+            자! 최근 소홀해진 팀웤과 단합력을 경민형에게 보여주자!`;
+            $('#buzerModalStory').html(story);
+            var qes=`사회자의 질문에 팀원 간 겹치지 않게 말하면 됩니다,<br>
+            예를 들어 여자아이돌은? 소녀시대, 블랙핑크<br>
+            단 3초안에 답해야 한다.`;
+            $('#buzerModalQuestion').html(qes);
+            $('#buzerModalBtn').click();
+          }
+          
+       }
+
+        function genQ8(){
+        <% if(name=="이정헌"){ %>
+        <% } else { %>
+            if($('#q8').css('opacity')>0.5)
+        <% } %>
+        {
+            var story=`명망있는 바보클럽, 선대 회장인 장영석 이정헌을 이어<br>
+            지원이가 차선 주자로 손꼽히고 있다.<br>
+            자! 지원이게 진정한 바보란 무엇인가 알려주자!`;
+
+            $('#buzerModalStory').html(story);
+            var qes=`지원이가 지목한 사람이 사회자의 질문에 답해야 하는데요.<br>
+            총 세가지 질문에 3초안에 모두 엉뚱한 대답이 되어야 한다. <br>
+            조금이라도 말이 된다면 실격!!
+            단, 똑같은 대답을 해서는 안되고 숫자계산을 읊어도 안된다.<br>`;
+            $('#buzerModalQuestion').html(qes);
+            $('#buzerModalBtn').click();
+          }
+          
+       }
+
+        function genQ9(){
+        <% if(name=="이정헌"){ %>
+        <% } else { %>
+            if($('#q9').css('opacity')>0.5)
+        <% } %>
+        {
+            var story=`상냥한 목소리로 아이들에게 사랑받는 은진쌤<br>
+            수학과 출신의 머리가 비상한 은진쌤은 아이들이 너무 상식이 없는 것 같다며,<br>
+            속상해 하신다. 자! 퀴즈를 맞춰 우리의 상식을 보여주자`;
+            $('#buzerModalStory').html(story);
+            var qes=`사회자의 질문에 모두가 아는 그 답을 팀원 한명씩 한글자씩 순서대로 말하면 된다.<br>
+            단 팀원 간, 단어를 언급하거나 공유해서는 안된다.<br>`;
+            $('#buzerModalQuestion').html(qes);
+            $('#buzerModalBtn').click();
+          }
+          
+       }
+
+        function genQ10(){
+        <% if(name=="이정헌"){ %>
+        <% } else { %>
+            if($('#q10').css('opacity')>0.5)
+        <% } %>
+        {
+            var story=`이번 여행에 큰 역할을 담당했던 명탐정 원도일!<br>
+            여러가지 장을 보느라 고생했던 원도일에게 박수한번 쳐주자<br>
+            자! 이제 간단한 게임으로 우리의 우정을 확인하자!`;
+            $('#buzerModalStory').html(story);
+            var qes=`다음 사회자가 제시하는 단어를 거꾸로 한글자씩 말하면 된다.<br>
+            단, 스파이가 세명 숨어있고 스파이는 틀려도 되고 안틀려도 된다.<br>
+            한번도 성공하지 못하면 스파이 4점 획득, 한번이라도 성공하면<br>
+            원도일님은 10점을 획득한다.<br>
+            <% if(name=="정혜원" ||name=="장호택" ||name=="이지원"){ %>
+                당신은 스파이입니다.
+                <% } %>
+            `;
+            $('#buzerModalQuestion').html(qes);
+            $('#buzerModalBtn').click();
+          }
+          
+       }
+
+
+       function openQ(qid){
+        socket.emit('open-q',qid);
+       }
+
+       function allCloseQ(){
+          socket.emit('close-all-q');
+       }
+
+
+
+
+
+    </script>
+    <script src="/assets/js/manager.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>

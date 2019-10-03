@@ -1,0 +1,121 @@
+body {
+  overflow-y: none;
+  background: black;
+  padding: 20px;
+  font-family: "Open Sans", sans-serif;
+  color: #333;
+  font-size: 14px;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+#phone {
+  overflow: hidden;
+  background-color: #fff;
+  width: 375px;
+  height: 812px;
+  padding: 0 0;
+}
+#phone header {
+  position: relative;
+  background: black;
+  height: 90px;
+  padding: 12px;
+}
+#phone header .search {
+  position: absolute;
+  bottom: 10px;
+  background: #FFF;
+  width: 327px;
+  height: 33px;
+  padding: 0 12px;
+  border-radius: 16.5px;
+  border: none;
+  font-size: 12px;
+}
+#phone .tabs {
+  font-family: 'Jua', sans-serif;
+  margin-bottom: 0;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+}
+#phone .tabs li {
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  width: 5.3rem;
+  cursor: pointer;
+  letter-spacing: .3px;
+}
+#phone .tabs li:hover > div {
+  color: #c83274;
+}
+#phone .tabs li.active > div {
+  color: #c83274;
+  border-bottom: 2px solid #c83274;
+}
+#phone .tabs li div {
+  display: inline-block;
+  color: #333;
+  padding: 12px 10px;
+  margin: 0 auto;
+}
+#phone .tab-content {
+  padding: 0 24px;
+  width: 2033px;
+}
+#phone .tab-content.room {
+  position: relative;
+  left: 0;
+  transition: 250ms;
+}
+#phone .tab-content.games {
+  position: relative;
+  left: -375px;
+  transition: 250ms;
+}
+
+#phone .tab-content.rank {
+  position: relative;
+  left: -750px;
+  transition: 250ms;
+}
+
+#phone .tab-content.info {
+  position: relative;
+  left: -1125px;
+  transition: 250ms;
+}
+
+
+#phone .tab-content ul {
+  display: inline-block;
+  float: left;
+  width: 327px;
+  margin-right: 48px;
+}
+
+.head-title{
+  display: inline-block;
+  color:#f34093;
+  font-family: 'Alfa Slab One', cursive;
+  font-size: 2rem;
+}
+.sub-title{
+  position: absolute;
+  left:1rem;
+  top:3rem;
+  display: inline-block;
+  color: #f788d1; 
+  font-family: 'Jua', sans-serif;
+}
+
+.welcome{
+  display: inline-block;
+  color:white;
+  float:right;
+}
