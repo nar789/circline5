@@ -194,6 +194,10 @@ app.get('/main', function (req, res) {
 	res.render(__dirname + '/main.html', { name: name });
 });
 
+app.get('/sound/ok',function(req,res){
+	res.sendFile(__dirname + '/assets/mp3/ok.mp3');
+});
+
 http.listen(1004, function () {
 	console.log('listening on *:1004');
 });
