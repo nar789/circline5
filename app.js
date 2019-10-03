@@ -165,6 +165,7 @@ var bodyParser = require('body-parser');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 app.use('/assets', express.static(__dirname + '/assets'));
+app.use('/assets/mp3', express.static(__dirname + '/assets/mp3'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
